@@ -1,0 +1,26 @@
+// https://containers.dev/implementors/json_reference
+
+{
+    "name": "Project Devcontainer",
+    "image": "alpine:latest",
+    "customizations": {
+        "vscode": {
+            "settings": {},
+            "extensions": [
+                "streetsidesoftware.code-spell-checker",
+                "adpyke.codesnap",
+                "Shinotatwu-DS.file-tree-generator",
+                "yzhang.markdown-all-in-one",
+                "DavidAnson.vscode-markdownlint",
+                "vscode-icons-team.vscode-icons",
+                "ms-azuretools.vscode-docker",
+                "ms-vscode.makefile-tools",
+                "ms-vscode.cpptools",
+                "ms-vscode.cpptools-extension-pack",
+                "ms-vscode.cpptools-themes",
+                "twxs.cmake",
+                "ms-vscode.cmake-tools"
+            ]
+        }
+    }
+}
