@@ -7,11 +7,11 @@ repos:
     -   id: clang-format
         name: Run Clang Format
         language: system
-        entry: clang-format -i --style=LLVM
+        entry: clang-format -i --style=file
         files: \.(h|hpp|cpp|c)$
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.5.0
+    rev: v4.6.0
     hooks:
       - id: check-added-large-files
       - id: check-case-conflict
