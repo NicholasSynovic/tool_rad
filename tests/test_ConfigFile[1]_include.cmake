@@ -1,0 +1,5 @@
+if(EXISTS "/home/nicholas/Documents/projects/tool_rad/tests/test_ConfigFile[1]_tests.cmake")
+  include("/home/nicholas/Documents/projects/tool_rad/tests/test_ConfigFile[1]_tests.cmake")
+else()
+  add_test(test_ConfigFile_NOT_BUILT test_ConfigFile_NOT_BUILT)
+endif()
