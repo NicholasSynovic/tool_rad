@@ -11,11 +11,6 @@ using json = nlohmann::json;
 
 void initializeApp(path adrDirectory) {
     ConfigFile cf = ConfigFile(adrDirectory);
-
-    if (cf.checkIfConfigFileExists() == false) {
-        cf.createConfigFile();
-    }
-
     cout << "RAD initalized in " << absolute(current_path()) << endl;
 }
 
