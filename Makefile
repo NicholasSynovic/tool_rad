@@ -107,7 +107,7 @@ rebuild_cache/fast: rebuild_cache
 
 # Special rule for the target list_install_components
 list_install_components:
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Available install components are: \"gmock\" \"gtest\""
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Available install components are: \"Unspecified\" \"gmock\" \"gtest\""
 .PHONY : list_install_components
 
 # Special rule for the target list_install_components
@@ -285,6 +285,58 @@ CLI11/fast:
 	$(MAKE) $(MAKESILENT) -f _deps/cli11_proj-build/src/CMakeFiles/CLI11.dir/build.make _deps/cli11_proj-build/src/CMakeFiles/CLI11.dir/build
 .PHONY : CLI11/fast
 
+#=============================================================================
+# Target rules for targets named ryml
+
+# Build rule for target.
+ryml: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 ryml
+.PHONY : ryml
+
+# fast build rule for target.
+ryml/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/rapidyaml-build/CMakeFiles/ryml.dir/build.make _deps/rapidyaml-build/CMakeFiles/ryml.dir/build
+.PHONY : ryml/fast
+
+#=============================================================================
+# Target rules for targets named ryml-uninstall
+
+# Build rule for target.
+ryml-uninstall: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 ryml-uninstall
+.PHONY : ryml-uninstall
+
+# fast build rule for target.
+ryml-uninstall/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/rapidyaml-build/CMakeFiles/ryml-uninstall.dir/build.make _deps/rapidyaml-build/CMakeFiles/ryml-uninstall.dir/build
+.PHONY : ryml-uninstall/fast
+
+#=============================================================================
+# Target rules for targets named c4core-amalgamate
+
+# Build rule for target.
+c4core-amalgamate: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 c4core-amalgamate
+.PHONY : c4core-amalgamate
+
+# fast build rule for target.
+c4core-amalgamate/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/rapidyaml-build/subprojects/c4core/build/CMakeFiles/c4core-amalgamate.dir/build.make _deps/rapidyaml-build/subprojects/c4core/build/CMakeFiles/c4core-amalgamate.dir/build
+.PHONY : c4core-amalgamate/fast
+
+#=============================================================================
+# Target rules for targets named c4core
+
+# Build rule for target.
+c4core: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 c4core
+.PHONY : c4core
+
+# fast build rule for target.
+c4core/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/rapidyaml-build/subprojects/c4core/build/CMakeFiles/c4core.dir/build.make _deps/rapidyaml-build/subprojects/c4core/build/CMakeFiles/c4core.dir/build
+.PHONY : c4core/fast
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -299,13 +351,17 @@ help:
 	@echo "... package"
 	@echo "... package_source"
 	@echo "... rebuild_cache"
+	@echo "... c4core-amalgamate"
+	@echo "... ryml-uninstall"
 	@echo "... CLI11"
 	@echo "... ConfigFile"
+	@echo "... c4core"
 	@echo "... gmock"
 	@echo "... gmock_main"
 	@echo "... gtest"
 	@echo "... gtest_main"
 	@echo "... main.exe"
+	@echo "... ryml"
 	@echo "... test_ConfigFile"
 .PHONY : help
 
