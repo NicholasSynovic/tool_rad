@@ -1,11 +1,18 @@
 #include "CLI/CLI.hpp"
+#include "classes/configFile.h"
 #include <filesystem>
 #include <iostream>
 
 using namespace std;
 using namespace filesystem;
 
-path initializeApp() { return current_path(); }
+bool initializeApp() {
+    ConfigFile cf = ConfigFile();
+
+    cout << cf.checkIfConfigFileExists() << endl;
+
+    return cf.checkIfConfigFileExists();
+}
 
 int main(int argc, char **argv) {
     CLI::App app{"RAD - Remember Architectural Decisions\nA tool to create and "

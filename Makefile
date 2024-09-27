@@ -195,6 +195,19 @@ main.exe/fast:
 .PHONY : main.exe/fast
 
 #=============================================================================
+# Target rules for targets named ConfigFile
+
+# Build rule for target.
+ConfigFile: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 ConfigFile
+.PHONY : ConfigFile
+
+# fast build rule for target.
+ConfigFile/fast:
+	$(MAKE) $(MAKESILENT) -f src/classes/CMakeFiles/ConfigFile.dir/build.make src/classes/CMakeFiles/ConfigFile.dir/build
+.PHONY : ConfigFile/fast
+
+#=============================================================================
 # Target rules for targets named gmock
 
 # Build rule for target.
@@ -274,6 +287,7 @@ help:
 	@echo "... package_source"
 	@echo "... rebuild_cache"
 	@echo "... CLI11"
+	@echo "... ConfigFile"
 	@echo "... gmock"
 	@echo "... gmock_main"
 	@echo "... gtest"

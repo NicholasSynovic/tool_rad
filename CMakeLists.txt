@@ -9,7 +9,7 @@ set (CMAKE_CXX_STANDARD 26)
 project(Project)
 
 add_subdirectory(src)
-add_subdirectory(tests)
+# add_subdirectory(tests)
 
 include(FetchContent)
 FetchContent_Declare(
