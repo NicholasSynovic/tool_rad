@@ -9,7 +9,7 @@ path CWD = absolute(current_path());
 
 path createFile() {
     path cwd = absolute(current_path());
-    path fp = cwd.append(FILENAME);
+    path fp = cwd.append(CONFIG_FILENAME);
 
     ofstream testFile(fp);
     testFile.close();
@@ -19,23 +19,23 @@ path createFile() {
 
 void deleteFile(path fp) { remove(fp); }
 
-TEST(ConfigFileSuite, TestForConfigFile) {
-    ConfigFile cf = ConfigFile(CWD);
+TEST(ConfigFileSuite, test_createConfigFile) {
+    ConfigFile cf = ConfigFile(path("docs/adr"));
 
-    path cfp = createFile();
-    EXPECT_TRUE(cf.checkIfConfigFileExists());
+    path tempFile = createFile();
+    EXPECT_EQ(cf.createConfigFile(), 1);
+    deleteFile(tempFile);
 
-    deleteFile(cfp);
-    EXPECT_FALSE(cf.checkIfConfigFileExists());
+    EXPECT_EQ(cf.createConfigFile(), 0);
+    deleteFile(cf.filepath);
 }
 
-TEST(ConfigFileSuite, TestCreateFile) {
-    ConfigFile cf = ConfigFile(CWD);
+TEST(ConfigFileSuite, test_writeDefaultState) {
+    ConfigFile cf = ConfigFile(path("docs/adr"));
+
+    EXPECT_EQ(cf.writeDefaultState(), 1);
 
     cf.createConfigFile();
-
-    EXPECT_TRUE(cf.checkIfConfigFileExists());
-
-    deleteFile(cf.configFilePath);
-    EXPECT_FALSE(cf.checkIfConfigFileExists());
+    EXPECT_EQ(cf.writeDefaultState(), 0);
+    deleteFile(cf.filepath);
 }
