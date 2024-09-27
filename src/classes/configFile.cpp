@@ -1,44 +1,47 @@
 #include "configFile.h"
 #include <filesystem>
 #include <fstream>
-#include <nlohmann/json.hpp>
 
 using namespace std;
 using namespace filesystem;
 
-using json = nlohmann::json;
-
-/*
- * When initializing the classs:
- * - identify the path for the config file
- * - identify where to store ADRs
- * - create the default configuration of data
- */
-
 ConfigFile::ConfigFile(path adrDirectory) {
-    fp = getCWD().append(FILENAME);
-    adrDir = getCWD().append("docs/adr")
+    filepath = absolute(current_path()).append(CONFIG_FILENAME);
+    adrDirectory = absolute(current_path()).append(adrDirectory.c_str());
+
+    DEFAULT_STATE = {{"adr_directory", adrDirectory}};
 }
 
-path getCWD() { return absolute(current_path()); }
+int ConfigFile::createConfigFile() const {
+    if (exists(filepath)) {
+        return 1;
+    }
 
-bool ConfigFile::checkIfConfigFileExists() const {
-    if (exists(configFilePath)) {
-        return true;
+    ofstream cf;
+    cf.open(filepath.c_str());
+
+    if (cf.is_open()) {
+        cf.close();
+        return 0;
     } else {
-        return false;
+        return 2;
     }
 }
 
-void ConfigFile::createConfigFile() const {
-    ofstream file(configFilePath);
+int ConfigFile::writeDefaultState() const {
+    if (exists(filepath) == false) {
+        return 1;
+    }
 
-    file << defaultConfig.dump(4) << endl;
+    ofstream cf;
+    cf.open(filepath);
 
-    file.close();
-}
-
-void ConfigFile::readConfigFile() {
-    ifstream jf(configFilePath);
-    config = json::parse(jf);
+    if (cf.is_open()) {
+        cf << DEFAULT_STATE.dump(4) << endl;
+        ;
+        cf.close();
+        return 0;
+    } else {
+        return 2;
+    }
 }

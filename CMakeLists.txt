@@ -26,11 +26,11 @@ FetchContent_Declare(
     GIT_TAG v1.15.2
 )
 
-include(FetchContent)
 FetchContent_Declare(
-    tomlplusplus
-    GIT_REPOSITORY https://github.com/marzer/tomlplusplus.git
-    GIT_TAG        v3.4.0
+    json
+    QUIET
+    GIT_REPOSITORY https://github.com/nlohmann/json
+    GIT_TAG v3.11.3
 )
 
 # For Windows: Prevent overriding the parent project's compiler/linker settings
@@ -38,4 +38,4 @@ set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 
 FetchContent_MakeAvailable(googletest)
 FetchContent_MakeAvailable(cli11_proj)
-FetchContent_MakeAvailable(tomlplusplus)
+FetchContent_MakeAvailable(json)
