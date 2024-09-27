@@ -9,8 +9,8 @@ using namespace filesystem;
 
 using json = nlohmann::json;
 
-void initializeApp() {
-    ConfigFile cf = ConfigFile();
+void initializeApp(path adrDirectory) {
+    ConfigFile cf = ConfigFile(adrDirectory);
 
     if (cf.checkIfConfigFileExists() == false) {
         cf.createConfigFile();
@@ -28,10 +28,14 @@ int main(int argc, char **argv) {
     CLI::App *initParser =
         app.add_subcommand("init", "Initialize RAD in the current directory");
 
+    path initADRDirectory = path("docs/adr");
+    initParser->add_option("-d,--directory", initADRDirectory,
+                           "Directory to store ADRs in");
+
     CLI11_PARSE(app, argc, argv);
 
     if (initParser->parsed()) {
-        initializeApp();
+        initializeApp(initADRDirectory);
     }
 
     std::cout << "Hello, World!" << std::endl;

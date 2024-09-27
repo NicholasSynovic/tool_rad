@@ -1,29 +1,25 @@
 #include <filesystem>
-#include <nlohmann/json.hpp>
 
 using namespace std;
 using namespace filesystem;
-
-using json = nlohmann::json;
 
 #ifndef CONFIG_FILE_H
 #define CONFIG_FILE_H
 
 const string FILENAME = ".rad";
 
-class ConfigFile {
+class ConfigFilev2 {
   private:
-    path cwd;
-    json config;
+    bool testIfConfigFileExists() const;
 
   public:
-    ConfigFile();
+    path filepath;
+    path adrDirectory;
 
-    path configFilePath;
+    ConfigFilev2(path adrDirectory);
 
-    bool checkIfConfigFileExists() const;
-    void createConfigFile() const;
-    void readConfigFile();
+    bool createConfigFile() const;
+    bool writeDefaultState() const;
 };
 
 #endif

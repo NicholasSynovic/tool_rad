@@ -8,10 +8,19 @@ using namespace filesystem;
 
 using json = nlohmann::json;
 
-ConfigFile::ConfigFile() {
-    cwd = absolute(current_path());
-    configFilePath = cwd.append(FILENAME);
+/*
+ * When initializing the classs:
+ * - identify the path for the config file
+ * - identify where to store ADRs
+ * - create the default configuration of data
+ */
+
+ConfigFile::ConfigFile(path adrDirectory) {
+    fp = getCWD().append(FILENAME);
+    adrDir = getCWD().append("docs/adr")
 }
+
+path getCWD() { return absolute(current_path()); }
 
 bool ConfigFile::checkIfConfigFileExists() const {
     if (exists(configFilePath)) {
@@ -23,6 +32,9 @@ bool ConfigFile::checkIfConfigFileExists() const {
 
 void ConfigFile::createConfigFile() const {
     ofstream file(configFilePath);
+
+    file << defaultConfig.dump(4) << endl;
+
     file.close();
 }
 

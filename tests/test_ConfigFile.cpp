@@ -5,6 +5,8 @@
 
 using namespace filesystem;
 
+path CWD = absolute(current_path());
+
 path createFile() {
     path cwd = absolute(current_path());
     path fp = cwd.append(FILENAME);
@@ -18,7 +20,7 @@ path createFile() {
 void deleteFile(path fp) { remove(fp); }
 
 TEST(ConfigFileSuite, TestForConfigFile) {
-    ConfigFile cf = ConfigFile();
+    ConfigFile cf = ConfigFile(CWD);
 
     path cfp = createFile();
     EXPECT_TRUE(cf.checkIfConfigFileExists());
@@ -28,7 +30,7 @@ TEST(ConfigFileSuite, TestForConfigFile) {
 }
 
 TEST(ConfigFileSuite, TestCreateFile) {
-    ConfigFile cf = ConfigFile();
+    ConfigFile cf = ConfigFile(CWD);
 
     cf.createConfigFile();
 
