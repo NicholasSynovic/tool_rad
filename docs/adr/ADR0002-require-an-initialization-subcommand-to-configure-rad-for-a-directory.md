@@ -18,6 +18,10 @@ application in any directory.
 Therefore, it is in the user's best interest to manually run the `init` command
 to configure a directory as the top level project directory with a `.rad` file.
 
+This `.rad` file will be in a structured, serialized format like TOML or JSON.
+The type of file will be added to the filename as the extension (i.e.
+`.rad.toml`)
+
 ## Consequences
 
 Wherever the nearest `.rad` file is within the filesystem hierarchy, it is
