@@ -9,9 +9,19 @@ using namespace filesystem;
 
 using json = nlohmann::json;
 
-void initializeApp(path adrDirectory) {
+bool initializeApp(path adrDirectory) {
     ConfigFile cf = ConfigFile(adrDirectory);
-    cout << "RAD initalized in " << absolute(current_path()) << endl;
+
+    if (cf.createConfigFile() != 0) {
+        return false;
+    }
+
+    if (cf.writeDefaultState() == 0) {
+        cout << "RAD initalized in " << absolute(current_path()) << endl;
+        return true;
+    } else {
+        return false;
+    }
 }
 
 int main(int argc, char **argv) {
@@ -33,6 +43,5 @@ int main(int argc, char **argv) {
         initializeApp(initADRDirectory);
     }
 
-    std::cout << "Hello, World!" << std::endl;
     return 0;
 }

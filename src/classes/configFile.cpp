@@ -6,8 +6,8 @@ using namespace std;
 using namespace filesystem;
 
 ConfigFile::ConfigFile(path adrDirectory) {
-    filepath = absolute(current_path()).append(CONFIG_FILENAME);
-    adrDirectory = absolute(current_path()).append(adrDirectory.c_str());
+    filepath = current_path().append(CONFIG_FILENAME);
+    adrDirectory = current_path().append(adrDirectory.c_str());
 
     DEFAULT_STATE = {{"adr_directory", adrDirectory}};
 }
