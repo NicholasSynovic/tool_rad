@@ -1,9 +1,12 @@
 #include "configFile.h"
 #include <filesystem>
 #include <fstream>
+#include <nlohmann/json.hpp>
 
 using namespace std;
 using namespace filesystem;
+
+using json = nlohmann::json;
 
 ConfigFile::ConfigFile() {
     cwd = absolute(current_path());
@@ -23,4 +26,7 @@ void ConfigFile::createConfigFile() const {
     file.close();
 }
 
-void ConfigFile::readConfigFile() { config = "Hello world"; }
+void ConfigFile::readConfigFile() {
+    ifstream jf(configFilePath);
+    config = json::parse(jf);
+}
