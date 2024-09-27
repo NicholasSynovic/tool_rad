@@ -2,16 +2,21 @@
 #include "classes/configFile.h"
 #include <filesystem>
 #include <iostream>
+#include <nlohmann/json.hpp>
 
 using namespace std;
 using namespace filesystem;
 
-bool initializeApp() {
+using json = nlohmann::json;
+
+void initializeApp() {
     ConfigFile cf = ConfigFile();
 
-    cout << cf.checkIfConfigFileExists() << endl;
+    if (cf.checkIfConfigFileExists() == false) {
+        cf.createConfigFile();
+    }
 
-    return cf.checkIfConfigFileExists();
+    cout << "RAD initalized in " << absolute(current_path()) << endl;
 }
 
 int main(int argc, char **argv) {
