@@ -11,11 +11,12 @@ const string FILENAME = ".rad";
 class ConfigFile {
   private:
     path cwd;
-    path configFilePath;
     string config;
 
   public:
     ConfigFile();
+
+    path configFilePath;
 
     bool checkIfConfigFileExists() const;
     void createConfigFile() const;

@@ -1,3 +1,5 @@
-add_test([=[ConfigFileSuite.ConfigFile]=]  /home/nicholas/Documents/projects/tool_rad/bin/test_ConfigFile [==[--gtest_filter=ConfigFileSuite.ConfigFile]==] --gtest_also_run_disabled_tests)
-set_tests_properties([=[ConfigFileSuite.ConfigFile]=]  PROPERTIES WORKING_DIRECTORY /home/nicholas/Documents/projects/tool_rad/tests SKIP_REGULAR_EXPRESSION [==[\[  SKIPPED \]]==])
-set(  test_ConfigFile_TESTS ConfigFileSuite.ConfigFile)
+add_test([=[ConfigFileSuite.TestForConfigFile]=]  /home/nicholas/Documents/projects/tool_rad/bin/test_ConfigFile [==[--gtest_filter=ConfigFileSuite.TestForConfigFile]==] --gtest_also_run_disabled_tests)
+set_tests_properties([=[ConfigFileSuite.TestForConfigFile]=]  PROPERTIES WORKING_DIRECTORY /home/nicholas/Documents/projects/tool_rad/tests SKIP_REGULAR_EXPRESSION [==[\[  SKIPPED \]]==])
+add_test([=[ConfigFileSuite.TestCreateFile]=]  /home/nicholas/Documents/projects/tool_rad/bin/test_ConfigFile [==[--gtest_filter=ConfigFileSuite.TestCreateFile]==] --gtest_also_run_disabled_tests)
+set_tests_properties([=[ConfigFileSuite.TestCreateFile]=]  PROPERTIES WORKING_DIRECTORY /home/nicholas/Documents/projects/tool_rad/tests SKIP_REGULAR_EXPRESSION [==[\[  SKIPPED \]]==])
+set(  test_ConfigFile_TESTS ConfigFileSuite.TestForConfigFile ConfigFileSuite.TestCreateFile)
