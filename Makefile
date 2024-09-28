@@ -285,45 +285,6 @@ CLI11/fast:
 	$(MAKE) $(MAKESILENT) -f _deps/cli11_proj-build/src/CMakeFiles/CLI11.dir/build.make _deps/cli11_proj-build/src/CMakeFiles/CLI11.dir/build
 .PHONY : CLI11/fast
 
-#=============================================================================
-# Target rules for targets named inja_test
-
-# Build rule for target.
-inja_test: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 inja_test
-.PHONY : inja_test
-
-# fast build rule for target.
-inja_test/fast:
-	$(MAKE) $(MAKESILENT) -f _deps/inja-build/CMakeFiles/inja_test.dir/build.make _deps/inja-build/CMakeFiles/inja_test.dir/build
-.PHONY : inja_test/fast
-
-#=============================================================================
-# Target rules for targets named single_inja_test
-
-# Build rule for target.
-single_inja_test: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 single_inja_test
-.PHONY : single_inja_test
-
-# fast build rule for target.
-single_inja_test/fast:
-	$(MAKE) $(MAKESILENT) -f _deps/inja-build/CMakeFiles/single_inja_test.dir/build.make _deps/inja-build/CMakeFiles/single_inja_test.dir/build
-.PHONY : single_inja_test/fast
-
-#=============================================================================
-# Target rules for targets named inja_benchmark
-
-# Build rule for target.
-inja_benchmark: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 inja_benchmark
-.PHONY : inja_benchmark
-
-# fast build rule for target.
-inja_benchmark/fast:
-	$(MAKE) $(MAKESILENT) -f _deps/inja-build/CMakeFiles/inja_benchmark.dir/build.make _deps/inja-build/CMakeFiles/inja_benchmark.dir/build
-.PHONY : inja_benchmark/fast
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -344,10 +305,7 @@ help:
 	@echo "... gmock_main"
 	@echo "... gtest"
 	@echo "... gtest_main"
-	@echo "... inja_benchmark"
-	@echo "... inja_test"
 	@echo "... main.exe"
-	@echo "... single_inja_test"
 	@echo "... test_ConfigFile"
 .PHONY : help
 

@@ -35,13 +35,14 @@ FetchContent_Declare(
 )
 
 set (INJA_USE_EMBEDDED_JSON OFF)
+set (INJA_BUILD_TESTS OFF)
+set (BUILD_BENCHMARK OFF)
 FetchContent_Declare(
     inja
     QUIET
     GIT_REPOSITORY https://github.com/pantor/inja.git
     GIT_TAG v3.4.0
 )
-
 
 
 # For Windows: Prevent overriding the parent project's compiler/linker settings
