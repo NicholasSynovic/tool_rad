@@ -31,8 +31,6 @@ int main(int argc, char **argv) {
     app.require_subcommand(0, 1);
 
     // init subcommand
-    path initADRDirectory = path("docs/adr");
-
     CLI::App *initParser =
         app.add_subcommand("init", "Initialize RAD in the current directory");
 
