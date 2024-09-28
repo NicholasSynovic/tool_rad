@@ -10,6 +10,7 @@ using json = nlohmann::json;
 #define CONFIG_FILE_H
 
 const string CONFIG_FILENAME = ".rad.json";
+const string CONFIG_ADR_DIRECTORY = "docs/adr";
 
 class ConfigFile {
   private:
@@ -19,7 +20,7 @@ class ConfigFile {
     path filepath;
     path adrDirectory;
 
-    ConfigFile(path adrDirectory);
+    ConfigFile();
 
     int createConfigFile() const;
     int writeDefaultState() const;

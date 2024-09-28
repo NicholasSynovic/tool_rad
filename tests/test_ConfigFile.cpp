@@ -20,7 +20,7 @@ path createFile() {
 void deleteFile(path fp) { remove(fp); }
 
 TEST(ConfigFileSuite, test_createConfigFile) {
-    ConfigFile cf = ConfigFile(path("docs/adr"));
+    ConfigFile cf = ConfigFile();
 
     path tempFile = createFile();
     EXPECT_EQ(cf.createConfigFile(), 1);
@@ -31,7 +31,7 @@ TEST(ConfigFileSuite, test_createConfigFile) {
 }
 
 TEST(ConfigFileSuite, test_writeDefaultState) {
-    ConfigFile cf = ConfigFile(path("docs/adr"));
+    ConfigFile cf = ConfigFile();
 
     EXPECT_EQ(cf.writeDefaultState(), 1);
 
