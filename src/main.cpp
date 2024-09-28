@@ -30,18 +30,24 @@ int main(int argc, char **argv) {
                  "rad"};
     app.require_subcommand(0, 1);
 
+    // init subcommand
+    path initADRDirectory = path("docs/adr");
+
     CLI::App *initParser =
         app.add_subcommand("init", "Initialize RAD in the current directory");
 
-    path initADRDirectory = path("docs/adr");
     initParser->add_option("-d,--directory", initADRDirectory,
                            "Directory to store ADRs in");
 
+    // Parse command line
     CLI11_PARSE(app, argc, argv);
 
+    // If init subcommand was ran
     if (initParser->parsed()) {
-        initializeApp(initADRDirectory);
+        if (initializeApp(initADRDirectory)) {
+            return 0;
+        } else {
+            return 1;
+        }
     }
-
-    return 0;
 }
