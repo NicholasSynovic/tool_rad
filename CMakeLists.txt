@@ -12,6 +12,7 @@ add_subdirectory(src)
 add_subdirectory(tests)
 
 include(FetchContent)
+
 FetchContent_Declare(
     cli11_proj
     QUIET
@@ -29,9 +30,19 @@ FetchContent_Declare(
 FetchContent_Declare(
     json
     QUIET
-    GIT_REPOSITORY https://github.com/nlohmann/json
+    GIT_REPOSITORY https://github.com/nlohmann/json.git
     GIT_TAG v3.11.3
 )
+
+set (INJA_USE_EMBEDDED_JSON OFF)
+FetchContent_Declare(
+    inja
+    QUIET
+    GIT_REPOSITORY https://github.com/pantor/inja.git
+    GIT_TAG v3.4.0
+)
+
+
 
 # For Windows: Prevent overriding the parent project's compiler/linker settings
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
@@ -39,3 +50,4 @@ set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 FetchContent_MakeAvailable(cli11_proj)
 FetchContent_MakeAvailable(json)
+FetchContent_MakeAvailable(inja)
