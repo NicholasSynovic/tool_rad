@@ -34,6 +34,8 @@ int main(int argc, char **argv) {
     CLI::App *initParser =
         app.add_subcommand("init", "Initialize RAD in the current directory");
 
+    CLI::App *addParser = app.add_subcommand("add", "Create a new ADR");
+
     // Parse command line
     CLI11_PARSE(app, argc, argv);
 
@@ -44,6 +46,12 @@ int main(int argc, char **argv) {
         } else {
             return 1;
         }
+    }
+
+    // If add subcommand was ran
+    if (addParser->parsed()) {
+        cout << "Hello world" << endl;
+        return 0;
     }
 
     return 0;
