@@ -3,3 +3,4 @@
 echo "Setting up repository"
 
 pre-commit install
+cmake .
