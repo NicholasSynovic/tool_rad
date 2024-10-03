@@ -1,6 +1,7 @@
 #include "CLI/CLI.hpp"
 #include "classes/configFile.h"
 #include <filesystem>
+#include <fstream>
 #include <iostream>
 #include <nlohmann/json.hpp>
 
@@ -18,6 +19,32 @@ bool initializeApp() {
 
     if (cf.writeDefaultState() == 0) {
         cout << "RAD initalized in " << absolute(current_path()) << endl;
+        return true;
+    } else {
+        return false;
+    }
+}
+
+bool addADR() {
+    json data;
+
+    ConfigFile cf = ConfigFile();
+
+    if (exists(cf.filepath)) {
+        ifstream jsonFile;
+        jsonFile.open(cf.filepath);
+
+        data = json::parse(jsonFile);
+        jsonFile.close();
+    } else {
+        return false;
+    }
+
+    path adrDirectory = path(data["adr_directory"]);
+
+    if (exists(adrDirectory)) {
+        ofstream adrFile(adrDirectory.append(".helloworld"));
+        cout << "Hello world" << endl;
         return true;
     } else {
         return false;
@@ -50,7 +77,7 @@ int main(int argc, char **argv) {
 
     // If add subcommand was ran
     if (addParser->parsed()) {
-        cout << "Hello world" << endl;
+        addADR();
         return 0;
     }
 

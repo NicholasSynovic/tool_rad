@@ -18,6 +18,8 @@ To create ADRs, the user can execute `rad add` and specify:
 
 ADR files will be in MarkDown format and the filename will be as follows:
 
+`ADR_#_{title}.md`
+
 ## Consequences
 
 When adding a ADR, the application will have to find the nearest `.rad.json`
