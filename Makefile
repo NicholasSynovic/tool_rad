@@ -285,6 +285,19 @@ CLI11/fast:
 	$(MAKE) $(MAKESILENT) -f _deps/cli11_proj-build/src/CMakeFiles/CLI11.dir/build.make _deps/cli11_proj-build/src/CMakeFiles/CLI11.dir/build
 .PHONY : CLI11/fast
 
+#=============================================================================
+# Target rules for targets named fmt
+
+# Build rule for target.
+fmt: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 fmt
+.PHONY : fmt
+
+# fast build rule for target.
+fmt/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/fmt-build/CMakeFiles/fmt.dir/build.make _deps/fmt-build/CMakeFiles/fmt.dir/build
+.PHONY : fmt/fast
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -301,6 +314,7 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... CLI11"
 	@echo "... ConfigFile"
+	@echo "... fmt"
 	@echo "... gmock"
 	@echo "... gmock_main"
 	@echo "... gtest"
