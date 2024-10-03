@@ -77,8 +77,11 @@ int main(int argc, char **argv) {
 
     // If add subcommand was ran
     if (addParser->parsed()) {
-        addADR();
-        return 0;
+        if (addADR()) {
+            return 0;
+        } else {
+            return 1;
+        }
     }
 
     return 0;
