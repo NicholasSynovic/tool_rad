@@ -1,5 +1,6 @@
 #include "CLI/CLI.hpp"
-#include "classes/configFile.h"
+#include "classes/files.h"
+
 #include <filesystem>
 #include <fstream>
 #include <iostream>
@@ -25,7 +26,7 @@ bool initializeApp() {
     }
 }
 
-bool addADR() {
+json readConfigFile() {
     json data;
 
     ConfigFile cf = ConfigFile();
@@ -37,18 +38,22 @@ bool addADR() {
         data = json::parse(jsonFile);
         jsonFile.close();
     } else {
+        return json();
+    }
+
+    return data;
+}
+
+bool addADR(json configFileData, string title) {
+    path adrDirectory = path(configFileData["adr_directory"]);
+
+    if (!exists(adrDirectory)) {
         return false;
     }
 
-    path adrDirectory = path(data["adr_directory"]);
+    NygardADR adr = NygardADR(title, adrDirectory);
 
-    if (exists(adrDirectory)) {
-        ofstream adrFile(adrDirectory.append(".helloworld"));
-        cout << "Hello world" << endl;
-        return true;
-    } else {
-        return false;
-    }
+    return adr.create();
 }
 
 int main(int argc, char **argv) {
@@ -61,7 +66,10 @@ int main(int argc, char **argv) {
     CLI::App *initParser =
         app.add_subcommand("init", "Initialize RAD in the current directory");
 
+    // add subcommand
+    string title;
     CLI::App *addParser = app.add_subcommand("add", "Create a new ADR");
+    addParser->add_option("-t,--title", title, "Title of the ADR")->required();
 
     // Parse command line
     CLI11_PARSE(app, argc, argv);
@@ -77,7 +85,13 @@ int main(int argc, char **argv) {
 
     // If add subcommand was ran
     if (addParser->parsed()) {
-        if (addADR()) {
+        json configFileData = readConfigFile();
+
+        if (configFileData.is_null()) {
+            return 1;
+        }
+
+        if (addADR(configFileData, title)) {
             return 0;
         } else {
             return 1;

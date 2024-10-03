@@ -1,9 +1,40 @@
-#include "configFile.h"
+#include "files.h"
 #include <filesystem>
 #include <fstream>
 
 using namespace std;
 using namespace filesystem;
+
+NygardADR::NygardADR(string title, path adrDirectory) {
+    int adrNumber = 0;
+    string adrFileTitle;
+
+    for (path p : directory_iterator(adrDirectory)) {
+        adrNumber += 1;
+    }
+
+    replace(title.begin(), title.end(), ' ', '-');
+
+    for (char c : title) {
+        adrFileTitle += tolower(c);
+    }
+
+    string rawFilename =
+        ADR_FILENAME_SUFFIX + to_string(adrNumber) + "_" + adrFileTitle + ".md";
+
+    filename = adrDirectory.append(rawFilename);
+}
+
+bool NygardADR::create() const {
+    ofstream adr(filename);
+
+    if (adr.is_open()) {
+        adr.close();
+        return 0;
+    } else {
+        return 1;
+    }
+}
 
 ConfigFile::ConfigFile() {
     filepath = current_path().append(CONFIG_FILENAME);

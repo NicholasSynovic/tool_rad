@@ -195,30 +195,17 @@ main.exe/fast:
 .PHONY : main.exe/fast
 
 #=============================================================================
-# Target rules for targets named ConfigFile
+# Target rules for targets named Files
 
 # Build rule for target.
-ConfigFile: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 ConfigFile
-.PHONY : ConfigFile
+Files: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Files
+.PHONY : Files
 
 # fast build rule for target.
-ConfigFile/fast:
-	$(MAKE) $(MAKESILENT) -f src/classes/CMakeFiles/ConfigFile.dir/build.make src/classes/CMakeFiles/ConfigFile.dir/build
-.PHONY : ConfigFile/fast
-
-#=============================================================================
-# Target rules for targets named test_ConfigFile
-
-# Build rule for target.
-test_ConfigFile: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_ConfigFile
-.PHONY : test_ConfigFile
-
-# fast build rule for target.
-test_ConfigFile/fast:
-	$(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_ConfigFile.dir/build.make tests/CMakeFiles/test_ConfigFile.dir/build
-.PHONY : test_ConfigFile/fast
+Files/fast:
+	$(MAKE) $(MAKESILENT) -f src/classes/CMakeFiles/Files.dir/build.make src/classes/CMakeFiles/Files.dir/build
+.PHONY : Files/fast
 
 #=============================================================================
 # Target rules for targets named gmock
@@ -313,14 +300,13 @@ help:
 	@echo "... package_source"
 	@echo "... rebuild_cache"
 	@echo "... CLI11"
-	@echo "... ConfigFile"
+	@echo "... Files"
 	@echo "... fmt"
 	@echo "... gmock"
 	@echo "... gmock_main"
 	@echo "... gtest"
 	@echo "... gtest_main"
 	@echo "... main.exe"
-	@echo "... test_ConfigFile"
 .PHONY : help
 
 
