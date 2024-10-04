@@ -182,30 +182,43 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named main.exe
+# Target rules for targets named rad
 
 # Build rule for target.
-main.exe: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 main.exe
-.PHONY : main.exe
+rad: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 rad
+.PHONY : rad
 
 # fast build rule for target.
-main.exe/fast:
-	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/main.exe.dir/build.make src/CMakeFiles/main.exe.dir/build
-.PHONY : main.exe/fast
+rad/fast:
+	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/rad.dir/build.make src/CMakeFiles/rad.dir/build
+.PHONY : rad/fast
 
 #=============================================================================
-# Target rules for targets named Files
+# Target rules for targets named ConfigFile
 
 # Build rule for target.
-Files: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Files
-.PHONY : Files
+ConfigFile: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 ConfigFile
+.PHONY : ConfigFile
 
 # fast build rule for target.
-Files/fast:
-	$(MAKE) $(MAKESILENT) -f src/classes/CMakeFiles/Files.dir/build.make src/classes/CMakeFiles/Files.dir/build
-.PHONY : Files/fast
+ConfigFile/fast:
+	$(MAKE) $(MAKESILENT) -f src/config/CMakeFiles/ConfigFile.dir/build.make src/config/CMakeFiles/ConfigFile.dir/build
+.PHONY : ConfigFile/fast
+
+#=============================================================================
+# Target rules for targets named ADRs
+
+# Build rule for target.
+ADRs: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 ADRs
+.PHONY : ADRs
+
+# fast build rule for target.
+ADRs/fast:
+	$(MAKE) $(MAKESILENT) -f src/adrs/CMakeFiles/ADRs.dir/build.make src/adrs/CMakeFiles/ADRs.dir/build
+.PHONY : ADRs/fast
 
 #=============================================================================
 # Target rules for targets named gmock
@@ -299,14 +312,15 @@ help:
 	@echo "... package"
 	@echo "... package_source"
 	@echo "... rebuild_cache"
+	@echo "... ADRs"
 	@echo "... CLI11"
-	@echo "... Files"
+	@echo "... ConfigFile"
 	@echo "... fmt"
 	@echo "... gmock"
 	@echo "... gmock_main"
 	@echo "... gtest"
 	@echo "... gtest_main"
-	@echo "... main.exe"
+	@echo "... rad"
 .PHONY : help
 
 

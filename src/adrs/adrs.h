@@ -1,23 +1,24 @@
+#include "fmt/core.h"
 #include <filesystem>
 
 using namespace std;
 using namespace filesystem;
 
-#ifndef CONFIG_FILE_H
-#define CONFIG_FILE_H
+#ifndef ADR_FILE_H
+#define ADR_FILE_H
+
+const string ADR_FILENAME_SUFFIX = "ADR_";
 
 class NygardADR {
-  private:
-    string unformattedTitle = "";
-    string rawFilename = "ADR_";
-
   public:
     int adrNumber = 0;
-    string title;
+
+    string adrFileTitle;
+    string adrTitle;
     path filename;
 
     NygardADR(string title, path adrDirectory);
-    bool create() const;
+    bool create();
 };
 
 #endif
