@@ -24,6 +24,8 @@ class ConfigFile {
 
     int createConfigFile() const;
     int writeDefaultState() const;
+    path identifyNearestConfigFilePath() const;
+    path findConfigFilePath(path directory) const;
 };
 
 #endif

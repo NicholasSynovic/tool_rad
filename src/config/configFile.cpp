@@ -45,3 +45,30 @@ int ConfigFile::writeDefaultState() const {
         return 2;
     }
 }
+
+path ConfigFile::findConfigFilePath(path directory) const {
+    for (path file : directory_iterator(directory)) {
+        path fn = file.filename();
+
+        if (fn.compare(CONFIG_FILENAME)) {
+            return file;
+        }
+    }
+
+    return path();
+}
+
+path ConfigFile::identifyNearestConfigFilePath() const {
+    path cfn = path();
+    path cwd = current_path();
+
+    while (!cwd.empty()) {
+        cfn = ConfigFile::findConfigFilePath(cwd);
+
+        if (!cfn.empty()) {
+            break;
+        }
+    }
+
+    return cfn;
+}
