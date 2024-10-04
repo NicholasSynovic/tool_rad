@@ -1,4 +1,5 @@
 #include "files.h"
+#include "fmt/core.h"
 #include <filesystem>
 #include <fstream>
 
@@ -6,12 +7,11 @@ using namespace std;
 using namespace filesystem;
 
 NygardADR::NygardADR(string title, path adrDirectory) {
-    int adrNumber = 0;
-    string adrFileTitle;
-
     for (path p : directory_iterator(adrDirectory)) {
         adrNumber += 1;
     }
+
+    adrTitle = to_string(adrNumber) + ". " + title;
 
     replace(title.begin(), title.end(), ' ', '-');
 
@@ -25,14 +25,17 @@ NygardADR::NygardADR(string title, path adrDirectory) {
     filename = adrDirectory.append(rawFilename);
 }
 
-bool NygardADR::create() const {
+bool NygardADR::create() {
+    string markdownContent = fmt::format("# {}\n\n## Context", adrTitle);
+
     ofstream adr(filename);
 
     if (adr.is_open()) {
+        adr << markdownContent << endl;
         adr.close();
-        return 0;
+        return true;
     } else {
-        return 1;
+        return false;
     }
 }
 

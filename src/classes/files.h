@@ -1,3 +1,4 @@
+#include "fmt/core.h"
 #include <filesystem>
 #include <nlohmann/json.hpp>
 
@@ -15,10 +16,14 @@ const string ADR_FILENAME_SUFFIX = "ADR_";
 
 class NygardADR {
   public:
+    int adrNumber = 0;
+
+    string adrFileTitle;
+    string adrTitle;
     path filename;
 
     NygardADR(string title, path adrDirectory);
-    bool create() const;
+    bool create();
 };
 
 class ConfigFile {
