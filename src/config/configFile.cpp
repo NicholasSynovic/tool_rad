@@ -76,25 +76,10 @@ path ConfigFile::findConfigFilePath(path directory) const {
      * Else, return an empty path
      */
     for (path file : directory_iterator(directory)) {
-        if (file == filepath) {
+        if (file.filename() == CONFIG_FILENAME && is_regular_file(file)) {
             return file;
         }
     }
 
     return path();
-}
-
-path ConfigFile::identifyNearestConfigFilePath() const {
-    path cfn = path();
-    path cwd = current_path();
-
-    while (!cwd.empty()) {
-        cfn = ConfigFile::findConfigFilePath(cwd);
-
-        if (!cfn.empty()) {
-            break;
-        }
-    }
-
-    return cfn;
 }

@@ -1,6 +1,7 @@
 #include "CLI/CLI.hpp"
 #include "adrs/adrs.h"
 #include "config/configFile.h"
+#include <fmt/core.h>
 
 #include <filesystem>
 #include <fstream>
@@ -12,44 +13,67 @@ using namespace filesystem;
 
 using json = nlohmann::json;
 
-bool initializeApp() {
-    ConfigFile cf = ConfigFile();
-
-    if (cf.createConfigFile() != 0) {
-        return false;
-    }
-
-    if (cf.writeDefaultState() == 0) {
-        cout << "RAD initalized in " << absolute(current_path()) << endl;
-        return true;
-    } else {
-        cout << "RAD already initalized at " << absolute(current_path())
-             << endl;
-        return false;
-    }
-}
-
-json readConfigFile() {
-    ifstream jsonFile;
-    json data;
-
+int initializeApp() {
+    /*
+     * Intialize RAD in the current working directory
+     *
+     * If a `.rad.json` file exists, return 1
+     * Else, create file
+     *
+     * If default state is written to the file, return 0
+     * Else, return 2
+     */
     ConfigFile cf = ConfigFile();
 
     if (exists(cf.filepath)) {
-        jsonFile.open(cf.filepath);
-        data = json::parse(jsonFile);
-        jsonFile.close();
+        cout << fmt::format("{} already exists", cf.filepath.c_str()) << endl;
+        return 1;
     } else {
-        path potentialJSONFile = cf.identifyNearestConfigFilePath();
+        cf.createConfigFile();
+        cout << fmt::format("{} created", cf.filepath.c_str()) << endl;
+    }
 
-        if (potentialJSONFile.empty()) {
-            return json();
-        } else {
-            jsonFile.open(potentialJSONFile);
-            data = json::parse(jsonFile);
-            jsonFile.close();
+    if (cf.writeDefaultState() == 0) {
+        cout << fmt::format("{} config written", cf.filepath.c_str()) << endl;
+        return 0;
+    } else {
+        cout << fmt::format("{} error writing config", cf.filepath.c_str())
+             << endl;
+        return 2;
+    }
+}
+
+path findConfigFile() {
+    ConfigFile cf = ConfigFile();
+
+    path cwd = current_path();
+
+    while (true) {
+        if (cwd != current_path().root_path()) {
+            path potentialConfigFile = cf.findConfigFilePath(cwd);
+
+            if (potentialConfigFile == path()) {
+                cwd = cwd.parent_path();
+            } else {
+                return potentialConfigFile;
+            }
+        }
+
+        else {
+            break;
         }
     }
+
+    return path();
+}
+
+json readConfigFile(ConfigFile cf) {
+    ifstream jsonFile;
+    json data;
+
+    jsonFile.open(cf.filepath);
+    data = json::parse(jsonFile);
+    jsonFile.close();
 
     return data;
 }
@@ -67,6 +91,14 @@ bool addADR(json configFileData, string title) {
 }
 
 int main(int argc, char **argv) {
+    /*
+     * RAD - Remeber Architectural Decisions
+     *
+     * Current options:
+     *  init - Create a `.rad.json` file in the current working directory
+     *  add - Create a new ADR in the directory listed in the nearest
+     * `.rad.json` -t,--title: Title of the ADR
+     */
     CLI::App app{"RAD - Remember Architectural Decisions\nA tool to create and "
                  "manage your architectural decisions",
                  "rad"};
@@ -86,26 +118,24 @@ int main(int argc, char **argv) {
 
     // If init subcommand was ran
     if (initParser->parsed()) {
-        if (initializeApp()) {
-            return 0;
-        } else {
-            return 1;
-        }
+        return initializeApp();
     }
 
     // If add subcommand was ran
     if (addParser->parsed()) {
-        json configFileData = readConfigFile();
 
-        if (configFileData.is_null()) {
+        path nearestConfigFile = findConfigFile();
+        if (nearestConfigFile.empty()) {
+            cout << "No config file (.rad.json) found." << endl;
+            cout << "Run `rad init` to create the config file" << endl;
             return 1;
         }
 
-        if (addADR(configFileData, title)) {
-            return 0;
-        } else {
-            return 1;
-        }
+        ConfigFile cf = ConfigFile();
+        cf.filepath = nearestConfigFile;
+
+        json data = readConfigFile(cf);
+        return addADR(data, title);
     }
 
     return 0;
