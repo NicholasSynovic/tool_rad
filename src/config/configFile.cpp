@@ -63,7 +63,6 @@ int ConfigFile::writeDefaultState() const {
 
     if (cf.is_open()) {
         cf << DEFAULT_STATE.dump(4) << endl;
-        ;
         cf.close();
         return 0;
     } else {
@@ -72,10 +71,12 @@ int ConfigFile::writeDefaultState() const {
 }
 
 path ConfigFile::findConfigFilePath(path directory) const {
+    /*
+     * Given a directory return the path to the .rad.json file if it exists.
+     * Else, return an empty path
+     */
     for (path file : directory_iterator(directory)) {
-        path fn = file.filename();
-
-        if (fn.compare(CONFIG_FILENAME)) {
+        if (file == filepath) {
             return file;
         }
     }
