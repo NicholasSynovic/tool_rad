@@ -6,6 +6,16 @@ using namespace std;
 using namespace filesystem;
 
 ConfigFile::ConfigFile() {
+    /*
+     * Classs to handle the creation, reading, and identification of RAD config
+     * files.
+     *
+     * This constructor:
+     *  sets the default filepath of where the RAD config file is expected to
+     *  be and
+     *  sets the default directory of where to store RAD created ADRs.
+     *      This information is to be stored in the created `.rad.json` file.
+     */
     filepath = current_path().append(CONFIG_FILENAME);
     adrDirectory = current_path().append(CONFIG_ADR_DIRECTORY);
 
@@ -13,12 +23,27 @@ ConfigFile::ConfigFile() {
 }
 
 int ConfigFile::createConfigFile() const {
-    if (exists(filepath)) {
+    /*
+     * This function creates the configuration file.
+     *
+     * It is solely meant to create an empty .rad.json file at the filepath
+     * path.
+     *
+     * Defualt content is added via the `writeDefaultState` function.
+     *
+     * The following logic is implemented:
+     *  If the `filepath` already exists AND is a file, return 1.
+     *  Else, create the file at `filepath`.
+     *
+     *  If the file is successfully created, return 0.
+     *  Else, return 2.
+     */
+    if (exists(filepath) && is_regular_file(filepath)) {
         return 1;
     }
 
     ofstream cf;
-    cf.open(filepath.c_str());
+    cf.open(filepath);
 
     if (cf.is_open()) {
         cf.close();

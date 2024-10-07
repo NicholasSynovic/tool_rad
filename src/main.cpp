@@ -23,23 +23,32 @@ bool initializeApp() {
         cout << "RAD initalized in " << absolute(current_path()) << endl;
         return true;
     } else {
+        cout << "RAD already initalized at " << absolute(current_path())
+             << endl;
         return false;
     }
 }
 
 json readConfigFile() {
+    ifstream jsonFile;
     json data;
 
     ConfigFile cf = ConfigFile();
 
     if (exists(cf.filepath)) {
-        ifstream jsonFile;
         jsonFile.open(cf.filepath);
-
         data = json::parse(jsonFile);
         jsonFile.close();
     } else {
-        return json();
+        path potentialJSONFile = cf.identifyNearestConfigFilePath();
+
+        if (potentialJSONFile.empty()) {
+            return json();
+        } else {
+            jsonFile.open(potentialJSONFile);
+            data = json::parse(jsonFile);
+            jsonFile.close();
+        }
     }
 
     return data;

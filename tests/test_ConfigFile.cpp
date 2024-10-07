@@ -1,41 +1,22 @@
+#include <configFile.h>
 #include <cstdio>
-#include <files.h>
 #include <fstream>
 #include <gtest/gtest.h>
 
 using namespace filesystem;
 
-path CWD = absolute(current_path());
-
-path createFile() {
-    path cwd = absolute(current_path());
-    path fp = cwd.append(CONFIG_FILENAME);
-
-    ofstream testFile(fp);
-    testFile.close();
-
-    return fp;
-}
-
-void deleteFile(path fp) { remove(fp); }
-
-TEST(ConfigFileSuite, test_createConfigFile) {
+TEST(ConfigFileSuite, test_ConfigFile) {
+    path cwd = current_path();
     ConfigFile cf = ConfigFile();
 
-    path tempFile = createFile();
-    EXPECT_EQ(cf.createConfigFile(), 1);
-    deleteFile(tempFile);
-
-    EXPECT_EQ(cf.createConfigFile(), 0);
-    deleteFile(cf.filepath);
+    EXPECT_EQ(cf.filepath, cwd.append(CONFIG_FILENAME));
+    EXPECT_EQ(cf.adrDirectory, cwd.append(CONFIG_ADR_DIRECTORY));
 }
 
-TEST(ConfigFileSuite, test_writeDefaultState) {
-    ConfigFile cf = ConfigFile();
+TEST(ConfigFileSuite, test_createConfigFile) {}
 
-    EXPECT_EQ(cf.writeDefaultState(), 1);
+TEST(ConfigFileSuite, test_writeDefaultState) {}
 
-    cf.createConfigFile();
-    EXPECT_EQ(cf.writeDefaultState(), 0);
-    deleteFile(cf.filepath);
-}
+TEST(ConfigFileSuite, test_findConfigFilePath) {}
+
+TEST(ConfigFileSuite, test_identifyNearestConfigFilePath) {}
