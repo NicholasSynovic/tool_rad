@@ -27,7 +27,8 @@ NygardADR::NygardADR(string title, path adrDirectory) {
 }
 
 bool NygardADR::create() {
-    string markdownContent = fmt::format("# {}\n\n## Context", adrTitle);
+    string markdownContent = fmt::format(
+        "# {}\n\n## Context\n\n## Decision\n\n## Consequences", adrTitle);
 
     ofstream adr(filename);
 

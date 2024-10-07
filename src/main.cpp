@@ -138,5 +138,6 @@ int main(int argc, char **argv) {
         return addADR(data, title);
     }
 
-    return 0;
+    cout << "Run `rad --help` for options" << endl;
+    return 1;
 }
