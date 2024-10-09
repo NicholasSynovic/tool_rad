@@ -53,3 +53,4 @@ CMakeUserPresets.json
 .cache/
 bin/
 *.helloworld
+build/

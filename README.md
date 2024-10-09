@@ -1,31 +1,32 @@
-# C Template Repository
+# RAD - Record Architecture Decisions
 
-> A template repository that C & CPP projects can inherit from to ensure tooling
-> consistency
+> A small tool to help you record your architecture decisions
 
 ## Table of Contents
 
-- [C Template Repository](#c-template-repository)
+- [RAD - Record Architecture Decisions](#rad---record-architecture-decisions)
   - [Table of Contents](#table-of-contents)
   - [About](#about)
-  - [Supported Tooling](#supported-tooling)
+  - [How To Install](#how-to-install)
 
 ## About
 
-This is a template repository that is intended to be inherited by other template
-repositories *to ensure consistent common tool deployment across languages*.
+This project is a continuation of the [`talo`](https://github.com/canpolat/talo)
+project in the sense to provide a single tool to manage Architecture Decision
+Reports (ADRs) within projects. Unlike `talo`, `rad` is meant to soley focus on
+ADRs and limit user configuration in the spirit of
+[`black`](https://github.com/psf/black). Additionally, this tool takes
+inspiration from [`git`](https://git-scm.com) to allow you to record ADRs
+anywhere within the project instead of just in the project's root directory.
 
-This will also support *optional* tooling that services like GitHub offer in
-order to provide repository owners access to these features without them having
-to discover it themselves.
+## How To Install
 
-## Supported Tooling
+The following instructions allow you to build `rad` locally:
 
-The following tooling is supported:
-
-- [Base Template Tooling](https://github.com/NicholasSynovic/template_base)
-- [C & CPP & CMake .gitignore](.gitignore)
-- [CMake](CMakeLists.txt)
-  - [CLI11](https://github.com/CLIUtils/CLI11)
-- [C & CPP pre-commit hooks](.pre-commit-config.yaml)
-  - clang-format
+```shell
+git clone https://github.com/NicholasSynovic/tool_rad
+cd tool_rad
+cmake .
+make
+cp ./bin/rad ~/.local/bin/rad
+```
