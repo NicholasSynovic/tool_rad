@@ -221,6 +221,19 @@ ADRs/fast:
 .PHONY : ADRs/fast
 
 #=============================================================================
+# Target rules for targets named Markdown
+
+# Build rule for target.
+Markdown: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Markdown
+.PHONY : Markdown
+
+# fast build rule for target.
+Markdown/fast:
+	$(MAKE) $(MAKESILENT) -f src/markdown/CMakeFiles/Markdown.dir/build.make src/markdown/CMakeFiles/Markdown.dir/build
+.PHONY : Markdown/fast
+
+#=============================================================================
 # Target rules for targets named test_ConfigFile
 
 # Build rule for target.
@@ -232,6 +245,19 @@ test_ConfigFile: cmake_check_build_system
 test_ConfigFile/fast:
 	$(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_ConfigFile.dir/build.make tests/CMakeFiles/test_ConfigFile.dir/build
 .PHONY : test_ConfigFile/fast
+
+#=============================================================================
+# Target rules for targets named test_Markdown
+
+# Build rule for target.
+test_Markdown: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_Markdown
+.PHONY : test_Markdown
+
+# fast build rule for target.
+test_Markdown/fast:
+	$(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_Markdown.dir/build.make tests/CMakeFiles/test_Markdown.dir/build
+.PHONY : test_Markdown/fast
 
 #=============================================================================
 # Target rules for targets named gmock
@@ -328,6 +354,7 @@ help:
 	@echo "... ADRs"
 	@echo "... CLI11"
 	@echo "... ConfigFile"
+	@echo "... Markdown"
 	@echo "... fmt"
 	@echo "... gmock"
 	@echo "... gmock_main"
@@ -335,6 +362,7 @@ help:
 	@echo "... gtest_main"
 	@echo "... rad"
 	@echo "... test_ConfigFile"
+	@echo "... test_Markdown"
 .PHONY : help
 
 
