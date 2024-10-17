@@ -87,7 +87,13 @@ bool addADR(json configFileData, string title) {
 
     NygardADR adr = NygardADR(title, adrDirectory);
 
-    return adr.create();
+    if (adr.create() == true) {
+        cout << "Created ADR at " << adr.filename.string() << endl;
+        return true;
+    } else {
+        cout << "Couldn't create ADR" << endl;
+        return false;
+    }
 }
 
 int main(int argc, char **argv) {
