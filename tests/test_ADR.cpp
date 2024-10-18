@@ -6,7 +6,7 @@
 using namespace std;
 using namespace filesystem;
 
-TEST(NygardADRSuite, test_NygardADR) {
+TEST(ADRSuite, test_ADR) {
     Markdown::title t_test = {0, "Hello World"};
     NygardADR adr = NygardADR(0, "Hello World");
 
@@ -14,7 +14,7 @@ TEST(NygardADRSuite, test_NygardADR) {
     EXPECT_EQ(adr.t.title, t_test.title);
 }
 
-TEST(NygardADRSuite, test_GenerateFilename) {
+TEST(ADRSuite, test_GenerateFilename) {
     path test_directory = path("/test");
 
     NygardADR adr = NygardADR(0, "Hello World");

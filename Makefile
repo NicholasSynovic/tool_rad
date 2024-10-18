@@ -260,17 +260,17 @@ test_Markdown/fast:
 .PHONY : test_Markdown/fast
 
 #=============================================================================
-# Target rules for targets named test_NygardADR
+# Target rules for targets named test_ADR
 
 # Build rule for target.
-test_NygardADR: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_NygardADR
-.PHONY : test_NygardADR
+test_ADR: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_ADR
+.PHONY : test_ADR
 
 # fast build rule for target.
-test_NygardADR/fast:
-	$(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_NygardADR.dir/build.make tests/CMakeFiles/test_NygardADR.dir/build
-.PHONY : test_NygardADR/fast
+test_ADR/fast:
+	$(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_ADR.dir/build.make tests/CMakeFiles/test_ADR.dir/build
+.PHONY : test_ADR/fast
 
 #=============================================================================
 # Target rules for targets named gmock
@@ -374,9 +374,9 @@ help:
 	@echo "... gtest"
 	@echo "... gtest_main"
 	@echo "... rad"
+	@echo "... test_ADR"
 	@echo "... test_ConfigFile"
 	@echo "... test_Markdown"
-	@echo "... test_NygardADR"
 .PHONY : help
 
 

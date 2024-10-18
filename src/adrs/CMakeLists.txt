@@ -1,6 +1,6 @@
 project(rad VERSION 0.0.1)
 
-add_library(ADRs STATIC nygard.cpp)
+add_library(ADRs STATIC adrs.cpp)
 
 target_link_libraries(ADRs fmt::fmt Markdown)
 

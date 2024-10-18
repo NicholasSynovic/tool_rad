@@ -8,9 +8,7 @@
 using namespace std;
 using namespace filesystem;
 
-NygardADR::NygardADR(int prefix, string title) { t = {prefix, title}; }
-
-path NygardADR::generateFilename(Markdown::title t, path adrDirectory) {
+path ADR::generateFilename(Markdown::title t, path adrDirectory) {
     string filenameTitle = "";
     string title = t.title;
 
@@ -26,7 +24,7 @@ path NygardADR::generateFilename(Markdown::title t, path adrDirectory) {
     return adrDirectory.append(rawFilename);
 }
 
-bool NygardADR::create(path adrDirectory) {
+bool ADR::create(path adrDirectory) {
     Markdown md = Markdown();
 
     string markdownContent = md.createDocument(t, vs);
