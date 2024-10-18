@@ -2,6 +2,7 @@
 #include "adrs/adrs.h"
 #include "config/configFile.h"
 #include <fmt/core.h>
+#include <markdown.h>
 
 #include <filesystem>
 #include <fstream>
@@ -82,16 +83,26 @@ bool addADR(json configFileData, string title) {
     path adrDirectory = path(configFileData["adr_directory"]);
 
     if (!exists(adrDirectory)) {
+        cout << "ERROR: Directory does not exist: " + adrDirectory.string()
+             << endl;
         return false;
     }
 
-    NygardADR adr = NygardADR(title, adrDirectory);
+    int adrPrefix = 0;
+    for (const directory_entry entry : directory_iterator(adrDirectory)) {
+        if (is_regular_file(entry)) {
+            adrPrefix++;
+        }
+    }
 
-    if (adr.create() == true) {
-        cout << "Created ADR at " << adr.filename.string() << endl;
+    NygardADR adr = NygardADR(adrPrefix, title);
+
+    if (adr.create(adrDirectory) == true) {
+        cout << "Created ADR at "
+             << adr.generateFilename(adr.t, adrDirectory).string() << endl;
         return true;
     } else {
-        cout << "Couldn't create ADR" << endl;
+        cout << "ERROR: Couldn't create ADR" << endl;
         return false;
     }
 }
@@ -132,7 +143,7 @@ int main(int argc, char **argv) {
 
         path nearestConfigFile = findConfigFile();
         if (nearestConfigFile.empty()) {
-            cout << "No config file (.rad.json) found." << endl;
+            cout << "ERROR: No config file (.rad.json) found." << endl;
             cout << "Run `rad init` to create the config file" << endl;
             return 1;
         }
