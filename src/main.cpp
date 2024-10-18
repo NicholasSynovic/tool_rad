@@ -109,21 +109,21 @@ bool addADR(json configFileData, string title) {
 
 int main(int argc, char **argv) {
     /*
-     * RAD - Remeber Architectural Decisions
+     * rad - Remeber Architectural Decisions
      *
      * Current options:
      *  init - Create a `.rad.json` file in the current working directory
      *  add - Create a new ADR in the directory listed in the nearest
      * `.rad.json` -t,--title: Title of the ADR
      */
-    CLI::App app{"RAD - Remember Architectural Decisions\nA tool to create and "
+    CLI::App app{"rad - Remember Architectural Decisions\nA tool to create and "
                  "manage your architectural decisions",
                  "rad"};
     app.require_subcommand(0, 1);
 
     // init subcommand
     CLI::App *initParser =
-        app.add_subcommand("init", "Initialize RAD in the current directory");
+        app.add_subcommand("init", "Initialize rad in the current directory");
 
     // add subcommand
     string title;
