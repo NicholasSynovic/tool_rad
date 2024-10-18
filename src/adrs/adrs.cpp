@@ -3,34 +3,38 @@
 #include <algorithm>
 #include <filesystem>
 #include <fstream>
+#include <markdown.h>
 
 using namespace std;
 using namespace filesystem;
 
-NygardADR::NygardADR(string title, path adrDirectory) {
-    for (path p : directory_iterator(adrDirectory)) {
-        adrNumber += 1;
-    }
+NygardADR::NygardADR(int prefix, string title) {
+    Markdown::title t = {prefix, title};
+}
 
-    adrTitle = to_string(adrNumber) + ". " + title;
+path NygardADR::generateFilename(Markdown::title t, path adrDirectory) {
+    string filenameTitle = "";
+    string title = t.title;
 
     replace(title.begin(), title.end(), ' ', '-');
 
     for (char c : title) {
-        adrFileTitle += tolower(c);
+        filenameTitle += tolower(c);
     }
 
     string rawFilename =
-        ADR_FILENAME_SUFFIX + to_string(adrNumber) + "_" + adrFileTitle + ".md";
+        ADR_FILENAME_SUFFIX + to_string(t.prefix) + "_" + filenameTitle + ".md";
 
-    filename = adrDirectory.append(rawFilename);
+    return adrDirectory.append(rawFilename);
 }
 
-bool NygardADR::create() {
-    string markdownContent = fmt::format(
-        "# {}\n\n## Context\n\n## Decision\n\n## Consequences", adrTitle);
+bool NygardADR::create(path adrDirectory) {
+    Markdown md = Markdown();
 
-    ofstream adr(filename);
+    string markdownContent = md.createDocument(t, vs);
+    path filepath = generateFilename(t, adrDirectory);
+
+    ofstream adr(filepath);
 
     if (adr.is_open()) {
         adr << markdownContent << endl;

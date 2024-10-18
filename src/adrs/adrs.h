@@ -1,5 +1,7 @@
 #include "fmt/core.h"
 #include <filesystem>
+#include <markdown.h>
+#include <vector>
 
 using namespace std;
 using namespace filesystem;
@@ -10,15 +12,19 @@ using namespace filesystem;
 const string ADR_FILENAME_SUFFIX = "ADR_";
 
 class NygardADR {
+  private:
+    Markdown::section s0 = {"Context"};
+    Markdown::section s1 = {"Decision"};
+    Markdown::section s2 = {"Consequences"};
+
+    vector<Markdown::section> vs = {s0, s1, s2};
+
   public:
-    int adrNumber = 0;
+    Markdown::title t;
 
-    string adrFileTitle;
-    string adrTitle;
-    path filename;
-
-    NygardADR(string title, path adrDirectory);
-    bool create();
+    NygardADR(int prefix, string title);
+    path generateFilename(Markdown::title t, path adrDirectory);
+    bool create(path adrDirectory);
 };
 
 #endif
