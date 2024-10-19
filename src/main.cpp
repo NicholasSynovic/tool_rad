@@ -103,6 +103,16 @@ bool addADR(json configFileData, string title) {
         adr = NygardADR(adrPrefix, title);
     } else if (adrFormat == "edgex") {
         adr = EdgeXADR(adrPrefix, title);
+    } else if (adrFormat == "business") {
+        adr = BusinessADR(adrPrefix, title);
+    } else if (adrFormat == "madr") {
+        adr = MADR(adrPrefix, title);
+    } else if (adrFormat == "tyree") {
+        adr = TyreeADR(adrPrefix, title);
+    } else if (adrFormat == "alexandrian") {
+        adr = AlexandrianADR(adrPrefix, title);
+    } else if (adrFormat == "planguage") {
+        adr = PlanguageADR(adrPrefix, title);
     } else {
         adr = NygardADR(adrPrefix, title);
     }
