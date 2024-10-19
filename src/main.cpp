@@ -82,6 +82,9 @@ json readConfigFile(ConfigFile cf) {
 bool addADR(json configFileData, string title) {
     path adrDirectory = path(configFileData["adr_directory"]);
 
+    string adrFormat = configFileData["adr_format"];
+    transform(adrFormat.begin(), adrFormat.end(), adrFormat.begin(), ::tolower);
+
     if (!exists(adrDirectory)) {
         cout << "ERROR: Directory does not exist: " + adrDirectory.string()
              << endl;
@@ -95,7 +98,14 @@ bool addADR(json configFileData, string title) {
         }
     }
 
-    NygardADR adr = NygardADR(adrPrefix, title);
+    ADR adr;
+    if (adrFormat == "nygard") {
+        adr = NygardADR(adrPrefix, title);
+    } else if (adrFormat == "edgex") {
+        adr = EdgeXADR(adrPrefix, title);
+    } else {
+        adr = NygardADR(adrPrefix, title);
+    }
 
     if (adr.create(adrDirectory) == true) {
         cout << "Created ADR at "

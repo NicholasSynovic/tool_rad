@@ -19,7 +19,8 @@ ConfigFile::ConfigFile() {
     filepath = current_path().append(CONFIG_FILENAME);
     adrDirectory = current_path().append(CONFIG_ADR_DIRECTORY);
 
-    DEFAULT_STATE = {{"adr_directory", adrDirectory}};
+    DEFAULT_STATE = {{"adr_directory", adrDirectory},
+                     {"adr_format", adrFormat}};
 }
 
 int ConfigFile::createConfigFile() const {

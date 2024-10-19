@@ -19,6 +19,7 @@ class ConfigFile {
   public:
     path filepath;
     path adrDirectory;
+    string adrFormat = "nygard";
 
     ConfigFile();
 
