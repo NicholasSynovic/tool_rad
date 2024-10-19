@@ -17,9 +17,8 @@ ConfigFile::ConfigFile() {
      *      This information is to be stored in the created `.rad.json` file.
      */
     filepath = current_path().append(CONFIG_FILENAME);
-    adrDirectory = current_path().append(CONFIG_ADR_DIRECTORY);
 
-    DEFAULT_STATE = {{"adr_directory", adrDirectory},
+    DEFAULT_STATE = {{"adr_directory", CONFIG_ADR_DIRECTORY.string()},
                      {"adr_format", adrFormat}};
 }
 
