@@ -109,7 +109,8 @@ bool addADR(json configFileData, string title) {
 
     if (adr.create(adrDirectory) == true) {
         cout << "Created ADR at "
-             << adr.generateFilename(adr.t, adrDirectory).string() << endl;
+             << absolute(adr.generateFilename(adr.t, adrDirectory)).string()
+             << endl;
         return true;
     } else {
         cout << "ERROR: Couldn't create ADR" << endl;
