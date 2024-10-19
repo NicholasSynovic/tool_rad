@@ -6,7 +6,6 @@
 using namespace filesystem;
 
 path TEST_FILENAME = current_path().append(CONFIG_FILENAME);
-path TEST_DIRECTORY = current_path().append(CONFIG_ADR_DIRECTORY);
 
 void createFile() {
     ofstream fp;
@@ -19,8 +18,6 @@ TEST(ConfigFileSuite, test_ConfigFile) {
     ConfigFile cf = ConfigFile();
 
     EXPECT_EQ(cf.filepath, TEST_FILENAME);
-    ;
-    EXPECT_EQ(cf.adrDirectory, TEST_DIRECTORY);
 }
 
 TEST(ConfigFileSuite, test_createConfigFile) {

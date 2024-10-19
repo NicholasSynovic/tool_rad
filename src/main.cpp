@@ -161,6 +161,8 @@ int main(int argc, char **argv) {
         ConfigFile cf = ConfigFile();
         cf.filepath = nearestConfigFile;
 
+        current_path(cf.filepath.parent_path());
+
         json data = readConfigFile(cf);
         return addADR(data, title);
     }
