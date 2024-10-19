@@ -1,13 +1,15 @@
-# RAD - Record Architecture Decisions
+# `rad` - Record Architecture Decisions
 
 > A small tool to help you record your architecture decisions
 
 ## Table of Contents
 
-- [RAD - Record Architecture Decisions](#rad---record-architecture-decisions)
+- [`rad` - Record Architecture Decisions](#rad---record-architecture-decisions)
   - [Table of Contents](#table-of-contents)
   - [About](#about)
   - [How To Install](#how-to-install)
+  - [How To Configure `rad`](#how-to-configure-rad)
+  - [ADR Formats](#adr-formats)
 
 ## About
 
@@ -30,3 +32,34 @@ cmake .
 make
 cp ./bin/rad ~/.local/bin/rad
 ```
+
+## How To Configure `rad`
+
+You can initialize `rad` with:
+
+```shell
+rad init
+```
+
+This will create a `.rad.json` file in the current directory.
+
+The `.rad.json` file is intentionally sparse. The following options can be
+configured in the file:
+
+- `adr_directory`: The *relative* path to store ADRs.
+  - Default: `docs/adr`
+- `adr_format`: The format of the ADRs.
+  - Default: `nygard`.
+    - See [ADR Formats](#adr-formats) for a list of availible formats
+
+## ADR Formats
+
+The following ADR formats are supported:
+
+- `edgex`: EdgeX
+- `business`: Business
+- `madr`: Markdown ADR (MADR)
+- `tyree`: Tyree
+- `planguage`: Planguage
+- `alexandrian`: Alexandrian
+- `nygard`: Nygard
