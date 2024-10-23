@@ -107,7 +107,7 @@ rebuild_cache/fast: rebuild_cache
 
 # Special rule for the target list_install_components
 list_install_components:
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Available install components are: \"Unspecified\" \"gmock\" \"gtest\""
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Available install components are: \"Unspecified\" \"gmock\" \"gtest\" \"sourcemeta_jsontoolkit\" \"sourcemeta_jsontoolkit_dev\""
 .PHONY : list_install_components
 
 # Special rule for the target list_install_components
@@ -338,6 +338,84 @@ CLI11/fast:
 .PHONY : CLI11/fast
 
 #=============================================================================
+# Target rules for targets named uriparser
+
+# Build rule for target.
+uriparser: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 uriparser
+.PHONY : uriparser
+
+# fast build rule for target.
+uriparser/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/jsontoolkit-build/vendor/uriparser/CMakeFiles/uriparser.dir/build.make _deps/jsontoolkit-build/vendor/uriparser/CMakeFiles/uriparser.dir/build
+.PHONY : uriparser/fast
+
+#=============================================================================
+# Target rules for targets named sourcemeta_jsontoolkit_uri
+
+# Build rule for target.
+sourcemeta_jsontoolkit_uri: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 sourcemeta_jsontoolkit_uri
+.PHONY : sourcemeta_jsontoolkit_uri
+
+# fast build rule for target.
+sourcemeta_jsontoolkit_uri/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/jsontoolkit-build/src/uri/CMakeFiles/sourcemeta_jsontoolkit_uri.dir/build.make _deps/jsontoolkit-build/src/uri/CMakeFiles/sourcemeta_jsontoolkit_uri.dir/build
+.PHONY : sourcemeta_jsontoolkit_uri/fast
+
+#=============================================================================
+# Target rules for targets named sourcemeta_jsontoolkit_json
+
+# Build rule for target.
+sourcemeta_jsontoolkit_json: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 sourcemeta_jsontoolkit_json
+.PHONY : sourcemeta_jsontoolkit_json
+
+# fast build rule for target.
+sourcemeta_jsontoolkit_json/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/jsontoolkit-build/src/json/CMakeFiles/sourcemeta_jsontoolkit_json.dir/build.make _deps/jsontoolkit-build/src/json/CMakeFiles/sourcemeta_jsontoolkit_json.dir/build
+.PHONY : sourcemeta_jsontoolkit_json/fast
+
+#=============================================================================
+# Target rules for targets named sourcemeta_jsontoolkit_jsonpointer
+
+# Build rule for target.
+sourcemeta_jsontoolkit_jsonpointer: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 sourcemeta_jsontoolkit_jsonpointer
+.PHONY : sourcemeta_jsontoolkit_jsonpointer
+
+# fast build rule for target.
+sourcemeta_jsontoolkit_jsonpointer/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/jsontoolkit-build/src/jsonpointer/CMakeFiles/sourcemeta_jsontoolkit_jsonpointer.dir/build.make _deps/jsontoolkit-build/src/jsonpointer/CMakeFiles/sourcemeta_jsontoolkit_jsonpointer.dir/build
+.PHONY : sourcemeta_jsontoolkit_jsonpointer/fast
+
+#=============================================================================
+# Target rules for targets named sourcemeta_jsontoolkit_jsonschema
+
+# Build rule for target.
+sourcemeta_jsontoolkit_jsonschema: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 sourcemeta_jsontoolkit_jsonschema
+.PHONY : sourcemeta_jsontoolkit_jsonschema
+
+# fast build rule for target.
+sourcemeta_jsontoolkit_jsonschema/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/jsontoolkit-build/src/jsonschema/CMakeFiles/sourcemeta_jsontoolkit_jsonschema.dir/build.make _deps/jsontoolkit-build/src/jsonschema/CMakeFiles/sourcemeta_jsontoolkit_jsonschema.dir/build
+.PHONY : sourcemeta_jsontoolkit_jsonschema/fast
+
+#=============================================================================
+# Target rules for targets named sourcemeta_jsontoolkit_jsonl
+
+# Build rule for target.
+sourcemeta_jsontoolkit_jsonl: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 sourcemeta_jsontoolkit_jsonl
+.PHONY : sourcemeta_jsontoolkit_jsonl
+
+# fast build rule for target.
+sourcemeta_jsontoolkit_jsonl/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/jsontoolkit-build/src/jsonl/CMakeFiles/sourcemeta_jsontoolkit_jsonl.dir/build.make _deps/jsontoolkit-build/src/jsonl/CMakeFiles/sourcemeta_jsontoolkit_jsonl.dir/build
+.PHONY : sourcemeta_jsontoolkit_jsonl/fast
+
+#=============================================================================
 # Target rules for targets named fmt
 
 # Build rule for target.
@@ -374,9 +452,15 @@ help:
 	@echo "... gtest"
 	@echo "... gtest_main"
 	@echo "... rad"
+	@echo "... sourcemeta_jsontoolkit_json"
+	@echo "... sourcemeta_jsontoolkit_jsonl"
+	@echo "... sourcemeta_jsontoolkit_jsonpointer"
+	@echo "... sourcemeta_jsontoolkit_jsonschema"
+	@echo "... sourcemeta_jsontoolkit_uri"
 	@echo "... test_ADR"
 	@echo "... test_ConfigFile"
 	@echo "... test_Markdown"
+	@echo "... uriparser"
 .PHONY : help
 
 
