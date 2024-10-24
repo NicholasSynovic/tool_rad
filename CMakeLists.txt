@@ -41,19 +41,10 @@ FetchContent_Declare(
     GIT_TAG 11.0.2
 )
 
-FetchContent_Declare(
-    jsontoolkit
-    QUIET
-    GIT_REPOSITORY https://github.com/sourcemeta/jsontoolkit.git
-    GIT_TAG v2.0.0
-)
-FetchContent_MakeAvailable(jsontoolkit)
-
 # For Windows: Prevent overriding the parent project's compiler/linker settings
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 
 FetchContent_MakeAvailable(googletest)
 FetchContent_MakeAvailable(cli11_proj)
 FetchContent_MakeAvailable(json)
-FetchContent_MakeAvailable(jsontoolkit)
 FetchContent_MakeAvailable(fmt)
