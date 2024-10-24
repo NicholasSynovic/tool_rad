@@ -1,6 +1,7 @@
 #include "configFile.h"
 #include <filesystem>
 #include <fstream>
+#include <iostream>
 
 using namespace std;
 using namespace filesystem;
@@ -17,9 +18,6 @@ ConfigFile::ConfigFile() {
      *      This information is to be stored in the created `.rad.json` file.
      */
     filepath = current_path().append(CONFIG_FILENAME);
-
-    DEFAULT_STATE = {{"adr_directory", CONFIG_ADR_DIRECTORY.string()},
-                     {"adr_format", adrFormat}};
 }
 
 int ConfigFile::createConfigFile() const {
@@ -82,4 +80,14 @@ path ConfigFile::findConfigFilePath(path directory) const {
     }
 
     return path();
+}
+
+bool ConfigFile::validateJSON(json data) {
+    for (string key : SCHEMA_KEYS) {
+        if (data.contains(key) == false) {
+            return false;
+        }
+    }
+
+    return true;
 }

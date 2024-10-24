@@ -76,6 +76,11 @@ json readConfigFile(ConfigFile cf) {
     data = json::parse(jsonFile);
     jsonFile.close();
 
+    if (cf.validateJSON(data) == false) {
+        cout << "ERROR: " << cf.filepath << " is not a valid config" << endl;
+        return json();
+    }
+
     return data;
 }
 
@@ -154,27 +159,34 @@ int main(int argc, char **argv) {
     // Parse command line
     CLI11_PARSE(app, argc, argv);
 
-    // If init subcommand was ran
+    // If init subcommand was ran, else identify the nearest config file
+    path nearestConfigFile;
     if (initParser->parsed()) {
         return initializeApp();
-    }
+    } else {
+        nearestConfigFile = findConfigFile();
 
-    // If add subcommand was ran
-    if (addParser->parsed()) {
-
-        path nearestConfigFile = findConfigFile();
         if (nearestConfigFile.empty()) {
             cout << "ERROR: No config file (.rad.json) found." << endl;
             cout << "Run `rad init` to create the config file" << endl;
             return 1;
         }
+    }
 
+    // If add subcommand was ran, create new ADR
+    if (addParser->parsed()) {
         ConfigFile cf = ConfigFile();
         cf.filepath = nearestConfigFile;
 
         current_path(cf.filepath.parent_path());
 
         json data = readConfigFile(cf);
+
+        if (data.empty()) {
+            cout << "ERROR: No valid config file (.rad.json) found." << endl;
+            return 1;
+        }
+
         return addADR(data, title);
     }
 
