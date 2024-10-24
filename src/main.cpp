@@ -73,12 +73,20 @@ json readConfigFile(ConfigFile cf) {
     json data;
 
     jsonFile.open(cf.filepath);
-    data = json::parse(jsonFile);
+
+    try {
+        data = json::parse(jsonFile);
+    } catch (json::parse_error &e) {
+        cout << "ERROR: " << cf.filepath << " is not a parsable JSON file"
+             << endl;
+        data = json();
+    }
+
     jsonFile.close();
 
     if (cf.validateJSON(data) == false) {
         cout << "ERROR: " << cf.filepath << " is not a valid config" << endl;
-        return json();
+        data = json();
     }
 
     return data;
