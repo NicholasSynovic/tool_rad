@@ -1,1 +1,4 @@
-{"adr_directory":"docs/adr","adr_format":"nygard"}
+{
+    "adr_directory": "docs/adr",
+    "adr_format": "nygard"
+}

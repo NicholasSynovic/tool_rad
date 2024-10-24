@@ -7,14 +7,12 @@
 #include <filesystem>
 #include <fstream>
 #include <iostream>
-#include <sourcemeta/jsontoolkit/json.h>
+#include <nlohmann/json.hpp>
 
 using namespace std;
 using namespace filesystem;
 
-/*using json = nlohmann::json;*/
-using json = sourcemeta::jsontoolkit::JSON;
-using sourcemeta::jsontoolkit::from_file;
+using json = nlohmann::json;
 
 int initializeApp() {
     /*
@@ -71,14 +69,20 @@ path findConfigFile() {
 }
 
 json readConfigFile(ConfigFile cf) {
-    json data = from_file(cf.filepath);
+    ifstream jsonFile;
+    json data;
+
+    jsonFile.open(cf.filepath);
+    data = json::parse(jsonFile);
+    jsonFile.close();
+
     return data;
 }
 
 bool addADR(json configFileData, string title) {
-    path adrDirectory = path(configFileData.at("adr_directory").to_string());
+    path adrDirectory = path(configFileData["adr_directory"]);
 
-    string adrFormat = configFileData.at("adr_format").to_string();
+    string adrFormat = configFileData["adr_format"];
     transform(adrFormat.begin(), adrFormat.end(), adrFormat.begin(), ::tolower);
 
     if (!exists(adrDirectory)) {

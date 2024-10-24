@@ -1,12 +1,9 @@
 #include "configFile.h"
 #include <filesystem>
 #include <fstream>
-#include <iostream>
-#include <sourcemeta/jsontoolkit/json.h>
 
 using namespace std;
 using namespace filesystem;
-using namespace sourcemeta::jsontoolkit;
 
 ConfigFile::ConfigFile() {
     /*
@@ -20,6 +17,9 @@ ConfigFile::ConfigFile() {
      *      This information is to be stored in the created `.rad.json` file.
      */
     filepath = current_path().append(CONFIG_FILENAME);
+
+    DEFAULT_STATE = {{"adr_directory", CONFIG_ADR_DIRECTORY.string()},
+                     {"adr_format", adrFormat}};
 }
 
 int ConfigFile::createConfigFile() const {
@@ -58,14 +58,11 @@ int ConfigFile::writeDefaultState() const {
         return 1;
     }
 
-    ostringstream stream;
-    stringify(DEFAULT_STATE, stream);
-
     ofstream cf;
     cf.open(filepath);
 
     if (cf.is_open()) {
-        cf << stream.str() << endl;
+        cf << DEFAULT_STATE.dump(4) << endl;
         cf.close();
         return 0;
     } else {
