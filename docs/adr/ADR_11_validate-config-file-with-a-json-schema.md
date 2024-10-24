@@ -12,7 +12,7 @@ that may or may not be within the file.
 
 ## Decision
 
-We will leverage a *JSON Schema* validation library to validate the config file
+We will leverage a *JSON Schema* validation function to validate the config file
 JSON at all parts of the toolchain:
 
 - creation,
@@ -21,7 +21,6 @@ JSON at all parts of the toolchain:
 
 ## Consequences
 
-We will have to replace the current JSON library and update the config file test
-suite to accomodate the JSON Schema impelmentation. Additionally, adding new
-config options and features will result in having to modfiy the JSON Schema
-along with the code implementation.
+We will have to update the config file test suite to accomodate the JSON Schema
+impelmentation. Additionally, adding new config options and features will result
+in having to modfiy the JSON Schema along with the code implementation.
