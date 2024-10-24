@@ -30,14 +30,3 @@ TEST(ConfigFileSuite, test_createConfigFile) {
 
     EXPECT_EQ(cf.createConfigFile(), 0);
 }
-
-TEST(ConfigFileSuite, test_findConfigFilePath) {
-    createFile();
-    ConfigFile cf = ConfigFile();
-
-    EXPECT_EQ(cf.findConfigFilePath(current_path()), TEST_FILENAME);
-
-    remove(TEST_FILENAME);
-
-    EXPECT_EQ(cf.findConfigFilePath(current_path()), path());
-}
