@@ -2,53 +2,52 @@ cmake_minimum_required(VERSION 3.30)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-set(CMAKE_CXX_COMPILER "icpx")
-set (CMAKE_CXX_STANDARD 26)
+
+option(RAD_BUILD "Build the rad project and its dependencies" OFF)
 
 project(Project)
 
-add_subdirectory(src)
-add_subdirectory(tests)
+if(RAD_BUILD)
+  add_subdirectory(src)
+  add_subdirectory(tests)
+endif()
 
 include(FetchContent)
 
 FetchContent_Declare(
-    cli11_proj
-    QUIET
-    GIT_REPOSITORY https://github.com/CLIUtils/CLI11.git
-    GIT_TAG v2.3.2
-)
+  cli11_proj
+  QUIET
+  GIT_REPOSITORY https://github.com/CLIUtils/CLI11.git
+  GIT_TAG v2.3.2)
 
 FetchContent_Declare(
-    googletest
-    QUIET
-    GIT_REPOSITORY https://github.com/google/googletest.git
-    GIT_TAG v1.15.2
-)
+  googletest
+  QUIET
+  GIT_REPOSITORY https://github.com/google/googletest.git
+  GIT_TAG v1.15.2)
 
 FetchContent_Declare(
-    json
-    QUIET
-    GIT_REPOSITORY https://github.com/nlohmann/json.git
-    GIT_TAG v3.11.3
-)
+  json
+  QUIET
+  GIT_REPOSITORY https://github.com/nlohmann/json.git
+  GIT_TAG v3.11.3)
 
 FetchContent_Declare(
-    fmt
-    QUIET
-    GIT_REPOSITORY https://github.com/fmtlib/fmt.git
-    GIT_TAG 11.0.2
-)
+  fmt
+  QUIET
+  GIT_REPOSITORY https://github.com/fmtlib/fmt.git
+  GIT_TAG 11.0.2)
 
 FetchContent_Declare(
-    cmark
-    QUIET
-    GIT_REPOSITORY https://github.com/github/cmark-gfm
-    GIT_TAG 0.29.0.gfm.13
-)
+  cmark
+  QUIET
+  GIT_REPOSITORY https://github.com/github/cmark-gfm
+  GIT_TAG 0.29.0.gfm.13)
 
 # For Windows: Prevent overriding the parent project's compiler/linker settings
-set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+set(gtest_force_shared_crt
+    ON
+    CACHE BOOL "" FORCE)
 
 FetchContent_MakeAvailable(cli11_proj)
 FetchContent_MakeAvailable(fmt)
