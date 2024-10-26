@@ -2,7 +2,6 @@ cmake_minimum_required(VERSION 3.30)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-set(CMAKE_C_COMPILER "gcc")
 set(CMAKE_CXX_COMPILER "icpx")
 set (CMAKE_CXX_STANDARD 26)
 
@@ -41,10 +40,18 @@ FetchContent_Declare(
     GIT_TAG 11.0.2
 )
 
+FetchContent_Declare(
+    cmark
+    QUIET
+    GIT_REPOSITORY https://github.com/github/cmark-gfm
+    GIT_TAG 0.29.0.gfm.13
+)
+
 # For Windows: Prevent overriding the parent project's compiler/linker settings
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 
-FetchContent_MakeAvailable(googletest)
 FetchContent_MakeAvailable(cli11_proj)
-FetchContent_MakeAvailable(json)
 FetchContent_MakeAvailable(fmt)
+FetchContent_MakeAvailable(googletest)
+FetchContent_MakeAvailable(json)
+FetchContent_MakeAvailable(cmark)
