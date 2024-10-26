@@ -1,4 +1,3 @@
-#include "fmt/core.h"
 #include <filesystem>
 #include <markdown.h>
 #include <vector>
